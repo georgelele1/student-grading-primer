@@ -1,2 +1,4 @@
-no-commit/
-node_modules/
+# environment files
+.env
+.env.*
+frontend/.env
