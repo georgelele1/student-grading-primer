@@ -69,7 +69,7 @@ export default function App() {
 
       <main className="main">
         <section className="card form-card">
-          <h2>Add tutor</h2>
+          <h2>Add student</h2>
           <StudentForm onSubmit={handleCreate} />
         </section>
 
@@ -80,7 +80,7 @@ export default function App() {
         )}
 
         <section className="card table-card">
-          <h2>Tutors</h2>
+          <h2>Students</h2>
           {loading ? (
             <p className="loading">Loading…</p>
           ) : (
