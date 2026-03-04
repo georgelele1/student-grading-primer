@@ -12,6 +12,7 @@ CORS(app)
 # - You must define and tell your tutor one edge case you have devised and how you have addressed this
 
 
+
 def _error(message="error"):
     # Spec: all errors return 404
     return jsonify({"error": message}), 404
@@ -71,11 +72,19 @@ def get_students():
     Route to fetch all students from the database
     return: Array of student objects
     """
+
     try:
         students = db.get_all_students()
         return jsonify(students), 200
     except Exception:
         return _error("Failed to fetch students")
+
+    # TODO: replace with your implementation. This is a mock response
+    return jsonify([
+        {'course': 'COMP1531', 'id': 1, 'mark': 85, 'name': 'Alice Zhang'},
+        {'course': 'COMP1531', 'id': 2, 'mark': 72, 'name': 'Bob Smith'}
+    ]), 200
+
 
 
 @app.route("/students", methods=["POST"])
@@ -87,6 +96,7 @@ def create_student():
     param mark: The mark the student received (from request body)
     return: The created student if successful
     """
+
     try:
         # Getting the request body - replace with your implementation
         student_data = request.json
@@ -108,6 +118,8 @@ def create_student():
         return _error("Failed to create student")
 
 
+
+
 @app.route("/students/<int:student_id>", methods=["PUT"])
 def update_student(student_id):
     """
@@ -117,6 +129,7 @@ def update_student(student_id):
     param mark: The mark the student received (from request body)
     return: The updated student if successful
     """
+
     try:
         student_data = request.json
         if not isinstance(student_data, dict):
@@ -158,6 +171,7 @@ def delete_student(student_id):
     Route to delete student by id
     return: The deleted student
     """
+
     try:
         deleted = db.delete_student(student_id)
         if deleted is None:
@@ -167,9 +181,11 @@ def delete_student(student_id):
         return _error("Failed to delete student")
 
 
+
 @app.route("/stats")
 def get_stats():
     """
+
     Route to show the stats of all student marks
     return: An object with the stats (count, average, min, max)
     """
@@ -194,6 +210,7 @@ def get_stats():
         return _error("Failed to compute stats")
 
 
+
 @app.route("/")
 def health():
     """Health check."""
@@ -201,4 +218,6 @@ def health():
 
 
 if __name__ == "__main__":
+
     app.run(host="0.0.0.0", port=5000)
+

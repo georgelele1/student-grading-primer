@@ -9,10 +9,10 @@ services:
     volumes:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
       - pgdata:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+
 
   backend:
+
     build: ./backend
     environment:
       DB_HOST: db
@@ -32,6 +32,7 @@ services:
     ports:
       - "8080:80"
 
+
   automark:
     build: ./automark
     depends_on:
@@ -39,5 +40,7 @@ services:
       - db
     profiles:
       - debug
+
 volumes:
   pgdata:
+
